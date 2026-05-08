@@ -7,8 +7,7 @@ content:
     label: Oferty
     type: collection
     path: src/content/offers
-    filename:
-      pattern: "{slug}.json"
+    filename: "{slug}.json"
     fields:
       - name: slug
         type: string
