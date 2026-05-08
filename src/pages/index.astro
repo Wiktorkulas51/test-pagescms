@@ -1,0 +1,61 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+
+const offersDir = path.join(process.cwd(), 'src/content/offers');
+const sitePath = path.join(process.cwd(), 'src/data/site.json');
+
+const files = fs.readdirSync(offersDir).filter(f => f.endsWith('.json'));
+const offers = files.map(f => JSON.parse(fs.readFileSync(path.join(offersDir, f), 'utf8')));
+const site = JSON.parse(fs.readFileSync(sitePath, 'utf8'));
+---
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{site.siteName}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #f8f9fa; color: #1a1a1a; padding: 2rem; }
+    .container { max-width: 800px; margin: 0 auto; }
+    h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+    .subtitle { color: #666; margin-bottom: 2rem; }
+    .card { background: white; border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .card h3 { font-size: 1.25rem; margin-bottom: 0.25rem; }
+    .bank { font-size: 0.875rem; color: #ff4fa3; font-weight: 600; }
+    .bonus { font-size: 1.5rem; font-weight: 700; margin: 0.5rem 0; }
+    .tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.75rem; }
+    .tag { font-size: 0.75rem; padding: 0.25rem 0.75rem; border-radius: 999px; background: #f0f0f0; }
+    .tag.green { background: #e8f5e9; color: #2e7d32; }
+    .desc { font-size: 0.875rem; color: #555; margin-bottom: 0.75rem; }
+    .cta { display: inline-block; padding: 0.5rem 1.5rem; background: #1a1a1a; color: white; border-radius: 999px; text-decoration: none; font-size: 0.875rem; font-weight: 600; }
+    .email { margin-top: 2rem; color: #666; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>{site.siteName}</h1>
+    <p class="subtitle">{site.subtitle}</p>
+    {offers.map(offer => (
+      <div class="card">
+        <span class="bank">{offer.bankName}</span>
+        <h3>{offer.title}</h3>
+        <div class="bonus">{offer.bonusAmount}</div>
+        <div class="tags">
+          <span class="tag">{offer.interestRate}</span>
+          {offer.isAccountFree && <span class="tag green">Konto darmowe</span>}
+          {offer.isCardFree && <span class="tag green">Karta darmowa</span>}
+          <span class="tag">{offer.category === 'personal' ? 'Osobiste' : offer.category === 'business' ? 'Firmowe' : 'Pożyczka'}</span>
+        </div>
+        <p class="desc">{offer.description}</p>
+        <a href={offer.affiliateLink} class="cta">Sprawdź ofertę</a>
+      </div>
+    ))}
+    <p class="email">Kontakt: {site.email}</p>
+    <p style="text-align:center;margin-top:1rem;font-size:0.75rem;color:#999;">Edytuj przez <a href="https://app.pagescms.org">PagesCMS</a></p>
+  </div>
+</body>
+</html>

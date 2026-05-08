@@ -1,0 +1,59 @@
+media:
+  input: public/media
+  output: /media
+
+content:
+  - name: offers
+    label: Oferty
+    type: collection
+    path: src/content/offers
+    fields:
+      - name: title
+        type: string
+        label: Tytuł oferty
+      - name: bankName
+        type: string
+        label: Nazwa banku
+      - name: bonusAmount
+        type: string
+        label: Kwota bonusu
+      - name: interestRate
+        type: string
+        label: Oprocentowanie
+      - name: isAccountFree
+        type: boolean
+        label: Konto darmowe?
+      - name: isCardFree
+        type: boolean
+        label: Karta darmowa?
+      - name: description
+        type: text
+        label: Opis
+        multiline: true
+      - name: affiliateLink
+        type: string
+        label: Link afiliacyjny
+      - name: category
+        type: select
+        label: Kategoria
+        options:
+          - label: Konta osobiste
+            value: personal
+          - label: Konta firmowe
+            value: business
+          - label: Pożyczki
+            value: loan
+  - name: settings
+    label: Ustawienia strony
+    type: file
+    path: src/data/site.json
+    fields:
+      - name: siteName
+        type: string
+        label: Nazwa strony
+      - name: subtitle
+        type: string
+        label: Podtytuł
+      - name: email
+        type: string
+        label: Email kontaktowy
