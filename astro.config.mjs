@@ -1,5 +1,12 @@
 import { defineConfig } from 'astro/config';
+import decapCmsOauth from 'astro-decap-cms-oauth';
+
 export default defineConfig({
-  output: 'static',
-  site: 'https://test-pagescms.pages.dev',
+  output: 'hybrid',
+  site: 'http://localhost:4321',
+  integrations: [
+    decapCmsOauth({
+      decapCMSSrcUrl: 'https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js',
+    }),
+  ],
 });
