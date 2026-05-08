@@ -12,16 +12,17 @@ content:
       - name: slug
         type: string
         label: Identyfikator (np. velo-konto)
-        pattern: "^[a-z0-9-]+$"
+        required: true
       - name: title
         type: string
         label: Tytuł oferty
+        required: true
       - name: bankName
         type: string
         label: Nazwa banku
       - name: bonusAmount
-        type: string
-        label: Kwota bonusu
+        type: number
+        label: Kwota bonusu (PLN)
       - name: interestRate
         type: string
         label: Oprocentowanie
@@ -47,6 +48,122 @@ content:
             value: business
           - label: Pożyczki
             value: loan
+      - name: logo
+        type: image
+        label: Logo banku
+      - name: publishedAt
+        type: date
+        label: Data publikacji
+      - name: tags
+        type: select
+        label: Tagi
+        options:
+          - label: Promocja
+            value: promo
+          - label: Limitowana
+            value: limited
+          - label: Nowość
+            value: new
+        list: true
+      - name: order
+        type: number
+        label: Kolejność wyświetlania
+      - name: uuid
+        type: uuid
+        label: ID oferty
+      - name: status
+        type: string
+        label: Status
+        readonly: true
+        description: "Automatyczny status oferty"
+
+  - name: pages
+    label: Strony (test wszystkich pól)
+    type: collection
+    path: src/content/pages
+    filename:
+      template: "{slug}.json"
+      field: create
+    fields:
+      - name: slug
+        type: string
+        label: Identyfikator
+        required: true
+      - name: title
+        type: string
+        label: Tytuł strony
+        required: true
+      - name: heroSubtitle
+        type: string
+        label: Podtytuł hero
+      - name: heroImage
+        type: image
+        label: Zdjęcie w hero
+      - name: heroCtaLabel
+        type: string
+        label: Tekst przycisku CTA
+      - name: heroCtaLink
+        type: string
+        label: Link przycisku CTA
+      - name: showHero
+        type: boolean
+        label: Pokazać sekcję hero?
+      - name: backgroundColor
+        type: select
+        label: Kolor tła
+        options:
+          - label: Biały
+            value: white
+          - label: Jasny róż
+            value: pink
+          - label: Ciemny
+            value: dark
+      - name: body
+        type: rich-text
+        label: Treść artykułu
+      - name: gallery
+        type: image
+        label: Galeria zdjęć
+        list: true
+      - name: price
+        type: number
+        label: Cena (PLN)
+      - name: discount
+        type: number
+        label: Rabat (%)
+      - name: availableFrom
+        type: date
+        label: Dostępne od
+      - name: availableTo
+        type: date
+        label: Dostępne do
+      - name: meta
+        type: object
+        label: SEO Meta
+        fields:
+          - name: metaTitle
+            type: string
+            label: Tytuł SEO
+          - name: metaDescription
+            type: text
+            label: Opis SEO
+      - name: code
+        type: code
+        label: Kod CSS/JS
+      - name: file
+        type: file
+        label: Plik do pobrania
+      - name: reference
+        type: reference
+        label: Powiązana oferta
+        collection: offers
+      - name: componentId
+        type: uuid
+        label: ID komponentu
+      - name: notes
+        type: text
+        label: Notatki
+
   - name: settings
     label: Ustawienia strony
     type: file
@@ -61,3 +178,19 @@ content:
       - name: email
         type: string
         label: Email kontaktowy
+      - name: logo
+        type: image
+        label: Logo strony
+      - name: maintenanceMode
+        type: boolean
+        label: Tryb konserwacji?
+      - name: analytics
+        type: object
+        label: Analityka
+        fields:
+          - name: googleId
+            type: string
+            label: Google Analytics ID
+          - name: facebookPixel
+            type: string
+            label: Facebook Pixel ID
