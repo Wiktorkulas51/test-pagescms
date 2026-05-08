@@ -28,8 +28,8 @@ content:
         type: string
         label: Nazwa banku
       - name: bonusAmount
-        type: number
-        label: Kwota bonusu (PLN)
+        type: string
+        label: Kwota bonusu
       - name: interestRate
         type: string
         label: Oprocentowanie
