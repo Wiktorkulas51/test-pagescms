@@ -61,17 +61,6 @@ content:
       - name: publishedAt
         type: date
         label: Data publikacji
-      - name: tags
-        type: select
-        label: Tagi
-        options:
-          - label: Promocja
-            value: promo
-          - label: Limitowana
-            value: limited
-          - label: Nowość
-            value: new
-        list: true
       - name: order
         type: number
         label: Kolejność wyświetlania
@@ -154,19 +143,6 @@ content:
           - name: metaDescription
             type: text
             label: Opis SEO
-      - name: code
-        type: code
-        label: Kod CSS/JS
-      - name: file
-        type: file
-        label: Plik do pobrania
-      - name: reference
-        type: reference
-        label: Powiązana oferta
-        collection: offers
-      - name: componentId
-        type: uuid
-        label: ID komponentu
       - name: notes
         type: text
         label: Notatki
