@@ -8,6 +8,13 @@ content:
     type: collection
     path: src/content/offers
     filename: "{slug}.json"
+    view:
+      fields: [title, bankName, isAccountFree, category]
+      primary: title
+      sort: [title, bankName]
+      default:
+        sort: title
+        order: asc
     fields:
       - name: slug
         type: string
